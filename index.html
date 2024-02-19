@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style/style.css"  rel="stylesheet">
+    <title>Todo</title>
+</head>
+<body>
+    <h1>To-do List</h1>
+    <form action="" id="todo-form">
+        <label for="todo-input" id="todo-label">Zadejte úkol</label>
+        <input type="text" id="todo-input">
+        <button type="submit" id="todo-button">Zadat</button>
+    </form>
+
+    <!-- Zde bude seznam všech nesplněných úkolů -->
+    <div id="ukoly">
+        <ul id="seznamUkolu"></ul>
+    </div>
+    
+    <!-- Zde se ukaže každý splněný úkol -->
+    <div id="hotove"></div>
+
+    <!-- Pokud ukol bude smazaný, přesune se sem -->
+    <div id="smazane"></div>
+
+    <script src="/js/todo.js"></script>
+</body>
+</html>
