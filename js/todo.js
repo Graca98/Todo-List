@@ -32,7 +32,8 @@ function createTask(ukol) {
 
     let editBtn = document.createElement("button");
     editBtn.id = "edit" + idUkolu;
-    editBtn.className = yellowBtn;
+    editBtn.className = "yellowBtn " + yellowBtn;
+    editBtn.type = "button"
     editBtn.textContent = "Edit";
 
     let deleteBtn = document.createElement("button");
@@ -82,6 +83,13 @@ function deleteTask() {
                 ukolElement.remove()
             }
         } 
+        //? Test na edit
+        else if (e.target.matches(".yellowBtn")) {
+            let ukolElement = e.target.closest("li")
+            if (ukolElement) {
+                console.log("Ano, jsem žlutý btn");
+            }
+        }
     })
 
     seznamHotovychUkolu.addEventListener("click", (e) => {
@@ -95,3 +103,5 @@ function deleteTask() {
     })
 }
 
+// editBtn.setAttribute("data-modal-target", "taskEdit-modal")
+// editBtn.setAttribute("data-modal-toggle", "taskEdit-modal")
