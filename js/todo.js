@@ -1,84 +1,70 @@
-let todoInput = document.getElementById("todo-input")
-let todoButton = document.getElementById("todo-button")
+// Styly
+let redBtn = "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900";
+let yellowBtn = "focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900";
+
+let todoInput = document.getElementById("todo-input");
+let todoButton = document.getElementById("todo-button");
+let seznamUkolu = document.getElementById("seznamUkolu");
+let seznamHotovychUkolu = document.getElementById("seznamHotovychUkolu");
 
 todoButton.onclick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    console.log("Input value: " + todoInput.value);
+    createTask(todoInput.value);
+};
 
-    console.log("V inputu je napsáno: " + todoInput.value);
-    createTask()
+// Function to generate a pseudo-UUID
+function generateUUID() {
+    const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return `${s4()}${s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 }
 
-let idCislo = 0
-function createTask() {
-    let seznamUkolu = document.getElementById("seznamUkolu")
+// Vytvoření úkolu včetně dalších elementů k němu patřicí 
+function createTask(ukol) {
+    let idUkolu = generateUUID()
+    let li = document.createElement("li");
+    let input = document.createElement("input");
+    input.type = "checkbox";
+    input.id = idUkolu;
+    let label = document.createElement("label");
+    label.htmlFor = idUkolu;
+    label.textContent = ukol;
 
-    if (idCislo === 0) {
-        idCislo = 1
-    } else {
-        idCislo++
-    }
+    let editBtn = document.createElement("button");
+    editBtn.id = "edit" + idUkolu;
+    editBtn.className = yellowBtn;
+    editBtn.textContent = "Edit";
 
-    let idUkolu = "ukol" + idCislo
+    let deleteBtn = document.createElement("button");
+    deleteBtn.id = "delete" + idUkolu;
+    deleteBtn.className = redBtn;
+    deleteBtn.textContent = "Delete";
 
-    let li = document.createElement("li")
-    let input = document.createElement("input")
-    input.type = "checkbox"
-    input.id = idUkolu
-    let label = document.createElement("label")
-    label.htmlFor = idUkolu
-    label.textContent = todoInput.value
+    li.appendChild(label);
+    li.appendChild(input);
+    li.appendChild(editBtn);
+    li.appendChild(deleteBtn);
+    seznamUkolu.appendChild(li);
 
-    let editBtn = document.createElement("button")
-    editBtn.id = "edit" + idCislo
-    editBtn.className = yellowBtn
-    editBtn.textContent = "Upravit"
-
-    let smazatBtn = document.createElement("button")
-    smazatBtn.id = "smazat" + idCislo
-    smazatBtn.className = redBtn
-    smazatBtn.textContent = "Smazat"
-
-    li.appendChild(label)
-    li.appendChild(input)
-    li.appendChild(editBtn)
-    li.appendChild(smazatBtn)
-    seznamUkolu.appendChild(li)
-
-    zpracujUkol()
+    processTasks();
 }
 
-function najdiUkol() {
-    let seznamUkolu = document.getElementById("seznamUkolu")
-    console.log("Počet úkolů " + seznamUkolu.childElementCount);
-    console.log("blabla je: " + seznamUkolu.childElementCount);
-}
-
-function zpracujUkol() {
-    let seznamUkolu = document.getElementById("seznamUkolu")
-    for (i = 1; i <= seznamUkolu.childElementCount; i++) {
-        let ukol = document.getElementById("ukol" + i)
-        ukol.onchange = () => {
-            if (ukol.checked) {
-                console.log("Checkbox \"" + ukol.id + "\" je zakliknutý = " + ukol.checked);
-            } else {
-                console.log("Checkbox \"" + ukol.id + "\" není zakliknutý = " + ukol.checked);
-            }
+// Přesouvá úkoly podle "checked" checkboxů
+function processTasks() {
+    seznamUkolu.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox' && e.target.checked) {
+            let ukol = e.target.closest("li")
+            seznamHotovychUkolu.appendChild(ukol)
         }
-    }
+    });
+
+    seznamHotovychUkolu.addEventListener("change", (e) => {
+        if (e.target.type === 'checkbox' && !e.target.checked) {
+            let ukol = e.target.closest("li")
+            seznamUkolu.appendChild(ukol)
+        }
+    })
 }
 
 
-//? ========== Styly ==========
-let redBtn = "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-let yellowBtn = "focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-
-
-//! ========== Testování =========
-let testUkol = document.getElementById("ukol0")
-function splnUkolTest(id) {
-    id.onchange = () => {
-        console.log("Checkbox \"" + id.id + "\" je zakliknutý = " + id.checked);
-    }
-}
-splnUkolTest(testUkol)
 
