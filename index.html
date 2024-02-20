@@ -9,18 +9,6 @@
 <body>
     <h1>To-do List</h1>
 
-    <!--! Testing -->
-    <ul>
-        <li>
-            <label for="ukol0">cus</label>
-            <input type="checkbox" id="ukol0">
-        </li>
-        <li>test</li>
-        <li>test</li>
-    </ul>
-    <button onclick="najdiUkol()">test</button>
-    <!--! Testing -->
-
     <form action="" id="todo-form">
         <label for="todo-input" id="todo-label">Zadejte úkol</label>
         <input type="text" id="todo-input">
@@ -29,14 +17,35 @@
 
     <!-- Zde bude seznam všech nesplněných úkolů -->
     <div id="ukoly">
+        <h2 class="nadpis">Seznam úkolů</h2>
         <ul id="seznamUkolu"></ul>
     </div>
     
     <!-- Zde se ukaže každý splněný úkol -->
-    <div id="hotove"></div>
+    <div id="hotove">
+        <h2 class="nadpis">Hotové úkoly</h2>
+        <ul id="seznamHotovychUkolu"></ul>
+    </div>
 
     <!-- Pokud ukol bude smazaný, přesune se sem -->
     <div id="smazane"></div>
+
+
+
+    <!--! Testing -->
+    <div id="testDiv">
+        <h2>Testovací zóna</h2>
+        <ul>
+            <li>
+                <label for="ukol0">cus</label>
+                <input type="checkbox" id="ukol0">
+            </li>
+            <li>test</li>
+            <li>test</li>
+        </ul>
+        <button onclick="najdiUkol()">test</button>
+    </div>
+    <!--! Testing -->
 
     <script src="/js/todo.js"></script>
 </body>

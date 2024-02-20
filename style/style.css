@@ -1,3 +1,16 @@
-h1 {
-    color: red;
+* {
+    margin: 0;
+    padding: 0;
 }
+
+h1 {
+    color: rgb(0, 119, 255);
+}
+
+
+/*! ========== Testing ========== */
+#testDiv {
+    border: 2px solid red;
+    padding: 10px 4px;
+}
+/*! ========== Testing ========== */

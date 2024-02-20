@@ -32,7 +32,7 @@ function createTask() {
     li.appendChild(input)
     seznamUkolu.appendChild(li)
 
-    splnUkolTest()
+    zpracujUkol()
 }
 
 function najdiUkol() {
@@ -41,25 +41,24 @@ function najdiUkol() {
     console.log("blabla je: " + seznamUkolu.childElementCount);
 }
 
-let testUkol = document.getElementById("ukol0")
-function splnUkol(id) {
-    id.onchange = () => {
-        console.log("Checkbox \"" + id.id + "\" je zakliknutý = " + id.checked);
-    }
-}
-
-function splnUkolTest() {
+function zpracujUkol() {
     let seznamUkolu = document.getElementById("seznamUkolu")
     for (i = 1; i <= seznamUkolu.childElementCount; i++) {
         let ukol = document.getElementById("ukol" + i)
         ukol.onchange = () => {
             console.log("Checkbox \"" + ukol.id + "\" je zakliknutý = " + ukol.checked);
         }
-
     }
-    // id.onchange = () => {
-    //     console.log("Checkbox je zakliknutý = " + id.checked);
-    // }
 }
 
-splnUkol(testUkol)
+
+//! ========== Testování =========
+let testUkol = document.getElementById("ukol0")
+function splnUkolTest(id) {
+    id.onchange = () => {
+        console.log("Checkbox \"" + id.id + "\" je zakliknutý = " + id.checked);
+    }
+}
+splnUkolTest(testUkol)
+//! ========== Testování =========
+
