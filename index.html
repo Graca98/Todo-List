@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <link href="/style/style.css"  rel="stylesheet">
     <title>Todo</title>
 </head>
 <body>
+    <!-- Něco k tailwindu? -->
+    <div class="prose">
+        <!-- ... -->
+    </div>
+
+
     <h1>To-do List</h1>
 
-    <form action="" id="todo-form">
+    <form action="" id="todo-form" class="flex flex-col">
         <label for="todo-input" id="todo-label">Zadejte úkol</label>
         <input type="text" id="todo-input">
         <button type="submit" id="todo-button">Zadat</button>
@@ -17,13 +24,13 @@
 
     <!-- Zde bude seznam všech nesplněných úkolů -->
     <div id="ukoly">
-        <h2 class="nadpis">Seznam úkolů</h2>
+        <h2 class="text-blue-500">Seznam úkolů</h2>
         <ul id="seznamUkolu"></ul>
     </div>
     
     <!-- Zde se ukaže každý splněný úkol -->
     <div id="hotove">
-        <h2 class="nadpis">Hotové úkoly</h2>
+        <h2 class="text-red-500">Hotové úkoly</h2>
         <ul id="seznamHotovychUkolu"></ul>
     </div>
 
