@@ -37,7 +37,8 @@ function createTask(ukol) {
 
     let deleteBtn = document.createElement("button");
     deleteBtn.id = "delete" + idUkolu;
-    deleteBtn.className = redBtn;
+    // "redBtn" pro zvolení delete buttonu později...
+    deleteBtn.className = "redBtn " + redBtn;
     deleteBtn.textContent = "Delete";
 
     li.appendChild(label);
@@ -47,24 +48,50 @@ function createTask(ukol) {
     seznamUkolu.appendChild(li);
 
     processTasks();
+    deleteTask();
 }
 
 // Přesouvá úkoly podle "checked" checkboxů
 function processTasks() {
     seznamUkolu.addEventListener('change', (e) => {
         if (e.target.type === 'checkbox' && e.target.checked) {
-            let ukol = e.target.closest("li")
-            seznamHotovychUkolu.appendChild(ukol)
+            let ukolElement = e.target.closest("li")
+            if (ukolElement) {
+                seznamHotovychUkolu.appendChild(ukolElement)
+            }
         }
     });
 
     seznamHotovychUkolu.addEventListener("change", (e) => {
         if (e.target.type === 'checkbox' && !e.target.checked) {
-            let ukol = e.target.closest("li")
-            seznamUkolu.appendChild(ukol)
+            let ukolElement = e.target.closest("li")
+            if (ukolElement) {
+                seznamUkolu.appendChild(ukolElement)
+            }
         }
     })
 }
 
+// Smaže ukoly z hotových nebo splněných
+function deleteTask() {
+    seznamUkolu.addEventListener("click", (e) => {
+        console.log(e.target.type);
+        if (e.target.matches(".redBtn")) {
+            let ukolElement = e.target.closest("li")
+            if (ukolElement) {
+                ukolElement.remove()
+            }
+        } 
+    })
 
+    seznamHotovychUkolu.addEventListener("click", (e) => {
+        console.log(e.target.type);
+        if (e.target.matches(".redBtn")) {
+            let ukolElement = e.target.closest("li")
+            if (ukolElement) {
+                ukolElement.remove()
+            }
+        } 
+    })
+}
 
