@@ -35,6 +35,8 @@ function createTask(ukol) {
     editBtn.className = "yellowBtn " + yellowBtn;
     editBtn.type = "button"
     editBtn.textContent = "Edit";
+    editBtn.setAttribute("data-modal-target", "taskEdit-modal")
+    editBtn.setAttribute("data-modal-toggle", "taskEdit-modal")
 
     let deleteBtn = document.createElement("button");
     deleteBtn.id = "delete" + idUkolu;
@@ -89,6 +91,27 @@ function deleteTask() {
             if (ukolElement) {
                 console.log("Ano, jsem žlutý btn");
             }
+        }
+
+        if (e.target.matches(".yellowBtn")) {
+            let ukolLabel = e.target.closest("label")
+            // console.log(ukolLabel);
+            let editBtn = e.target.closest("button")
+            if (editBtn) {
+                editBtn.onclick = () => {
+                    editBtn.setAttribute("data-modal-show", "taskEdit-modal")
+                }
+                if (ukolLabel) {
+                    let editInput = document.getElementById("editInput")
+                    let editBtnSubmit = document.getElementById("editBtnSubmit")
+
+                    editBtnSubmit.onclick = () => {
+                        ukolLabel.textContent = editInput.value
+                    }
+
+                }
+            }
+
         }
     })
 
